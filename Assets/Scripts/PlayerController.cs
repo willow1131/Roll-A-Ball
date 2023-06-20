@@ -1,15 +1,25 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-   
+
     public float speed = 5.0f;
     private Rigidbody rb;
     private int pickupCount;
     private Timer timer;
+    private bool gameOver;
+
+    [Header("UI")]
+    public GameObject inGamePanel;
+    public GameObject winPanel;
+    public TMP_Text scoreText;
+    public TMP_Text timerText;
+    public TMP_Text winTimeText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,44 +32,85 @@ public class PlayerController : MonoBehaviour
         //get the timer object 
         timer = FindObjectOfType<Timer>();
         timer.StartTimer();
+        //turn on our ingame panel
+        inGamePanel.SetActive(true);
+        //turn on our win panel
+        winPanel.SetActive(false);
+    }
 
+    private void Update()
+    {
+        timerText.text = "HEART RATE:" + timer.GetTime().ToString("F2");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
+        if (gameOver == true)
+            return;
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal,0, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
         rb.AddForce(movement * speed);
 
-       
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Pick Up")
+        if (other.tag == "Pick Up")
         {
             Destroy(other.gameObject);
             //decrement the pickup count
             pickupCount -= 1;
-           //run the check pickups function
-           CheckPickups();
+            //run the check pickups function
+            CheckPickups();
         }
- 
+
     }
 
     void CheckPickups()
     {
-        //print the amount of pickups left in our scene
-        print("PickUps Left: " + pickupCount);
+        //display the amount of pickups left in our scene
+        scoreText.text = "BLUD CLOTS: " + pickupCount;
 
         if (pickupCount == 0)
         {
-            timer.StopTimer();
-            print("yippi, your time was:" + timer.GetTime());
+            WinGame();
         }
+    }
+
+    void WinGame()
+    {
+        //Set the game over to true 
+        gameOver = true;
+        //stop timer
+        timer.StopTimer();
+        // turn on our win panel
+        winPanel.SetActive(true);
+        //turn off our win panel
+        inGamePanel.SetActive(false);
+        //display the timer on the win time text
+        winTimeText.text = "Your time was:" + timer.GetTime().ToString("F2");
+
+        //set the velocirty of the rigid body to zero
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+    }
+
+    public void RestartGame()
+
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene
+            (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
