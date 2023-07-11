@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 853032765b6e5094f8947935b8bb48dd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Horror Brush
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: fcbec08454a24e44a9082927c5c649ec, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
