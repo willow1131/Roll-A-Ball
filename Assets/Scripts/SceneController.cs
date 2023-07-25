@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneController : MonoBehaviour
+{
+    // will change our scene to the string passed in
+    void ChangeScene(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
+    }
+
+    // Reloads the current scene we are in
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    //loads title scene. must be called title exaclty
+    public void ToTitleScene()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    //gets our active scenes name
+    public string GetSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
+    //quits our game 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+}
