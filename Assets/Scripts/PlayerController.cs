@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         timer.StartTimer();
         //turn on our ingame panel
         inGamePanel.SetActive(true);
-        //turn on our win panel
+        //turn off our win panel
         GameOverPanel.SetActive(false);
     }
 
