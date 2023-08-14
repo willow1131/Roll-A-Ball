@@ -12,7 +12,7 @@ public class SceneController : MonoBehaviour
     }
 
     // Reloads the current scene we are in
-    void ReloadScene()
+    public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

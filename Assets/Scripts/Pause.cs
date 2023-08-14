@@ -5,12 +5,12 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
     public GameObject pausePanel;
-    bool isPaused = false;
+    public bool isPaused;
 
     
     private void Start()
     {
-        pausePanel.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -24,17 +24,33 @@ public class Pause : MonoBehaviour
     public void TogglePause()
     {
         isPaused = !isPaused;
-
         if (isPaused)
         {
-            pausePanel.SetActive(true);
             Time.timeScale = 0;
+            pausePanel.SetActive(true);
+            Debug.Log("Attempting to unpause");
         }
         else
         {
-            pausePanel.SetActive(false);
             Time.timeScale = 1;
+            pausePanel.SetActive(false);
+            Debug.Log("Attempting to pause");
         }
 
     }
+    IEnumerator WaitForTogglePanel()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if(isPaused)
+        {
+            isPaused = false;
+
+        }
+        else
+        {
+            isPaused = true;
+            
+        }
+    }
+    
 }
