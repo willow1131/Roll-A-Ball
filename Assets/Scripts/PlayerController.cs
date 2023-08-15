@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     Color originalColour;
     private Timer timer;
     private bool gameOver;
+    private bool grounded = true; 
+
+    GameController gameController;
+    CameraController cameraController;
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -24,9 +28,8 @@ public class PlayerController : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text winTimeText;
 
-    //Controllers
-    CameraController cameraController;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
         resetPoint = GameObject.Find("Reset Point");
         originalColour = GetComponent<Renderer>().material.color;
 
-        cameraController = FindObjectOfType<cameraController>();
+        cameraController = FindObjectOfType<CameraController>();
     }
 
     private void Update()
@@ -63,21 +66,25 @@ public class PlayerController : MonoBehaviour
         if (gameOver == true)
             return;
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
-        rb.AddForce(movement * speed);
-
-        if(cameraController.cameraStyle == CameraStyle.Free)
+        if (grounded)
         {
-            //Rotates the player to the direction of the camera
-            transform.eulerAngles = Camera.main.transform.eulerAngles;
-            //Translates the unput vectors into coordinates
-            movement = transform.TransformDirection(movement);
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+
+            Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+
+
+            if (cameraController.cameraStyle == CameraController.CameraStyle.Free)
+            {
+                //Rotates the player to the direction of the camera
+                transform.eulerAngles = Camera.main.transform.eulerAngles;
+                //Translates the unput vectors into coordinates
+                movement = gameObject.transform.TransformDirection(movement);
+            }
+
+            rb.AddForce(movement * speed * Time.deltaTime);
         }
-
-
+       
     }
 
     private void OnTriggerEnter(Collider other)

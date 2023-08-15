@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum CameraStyle {Fixed, Free}
 
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
+    public CameraStyle cameraStyle;
+    public Transform pivot;
+    public float rotationSpeed = 1f;
 
     private Vector3 offset;
-
+    private Vector3 pivotOffset;
     
     void Start()
     {
@@ -26,7 +30,7 @@ public class CameraController : MonoBehaviour
         transform.position = player.transform.position + offset; 
 
         //If we are using the fixed camera mode
-        if (CameraStyle == CameraStyle.Fixed)
+        if (cameraStyle == CameraStyle.Fixed)
         {
             //Set the cameras position to be the players position plus the offset
             transform.position = player.transform.position + offset;
@@ -50,7 +54,7 @@ public class CameraController : MonoBehaviour
 
     public enum CameraStyle { Fixed, Free }
 
-    public class CameraController : MonoBehaviour
+    public class cameraController : MonoBehaviour
     {
         public GameObject player;
         public CameraStyle cameraStyle;
