@@ -18,8 +18,10 @@ public class PlayerController : MonoBehaviour
     private bool gameOver;
     private bool grounded = true; 
 
+    //Controllers
     GameController gameController;
     CameraController cameraController;
+    SoundController soundController;
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -27,9 +29,10 @@ public class PlayerController : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public TMP_Text winTimeText;
+    private object Wall;
 
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +50,9 @@ public class PlayerController : MonoBehaviour
         GameOverPanel.SetActive(false);
         resetPoint = GameObject.Find("Reset Point");
         originalColour = GetComponent<Renderer>().material.color;
-
+        gameController = FindObjectOfType<GameController>();
         cameraController = FindObjectOfType<CameraController>();
+        soundController = FindObjectOfType<SoundController>();
     }
 
     private void Update()
@@ -61,6 +65,9 @@ public class PlayerController : MonoBehaviour
     {
 
         if (resetting)
+            return;
+
+        if (gameController.controlType == ControlType.WorldTilt)
             return;
 
         if (gameOver == true)
@@ -96,6 +103,7 @@ public class PlayerController : MonoBehaviour
             pickupCount -= 1;
             //run the check pickups function
             SetCountText();
+            soundController.PLayPickupSound();
         }
 
     }
@@ -105,6 +113,14 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Respawn"))
         {
             StartCoroutine(ResetPlayer());
+        }
+    }
+
+    private void onCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            soundController.PlayCollisionSound(collision.gameObject);
         }
     }
 
@@ -149,6 +165,7 @@ public class PlayerController : MonoBehaviour
         inGamePanel.SetActive(false);
         //display the timer on the win time text
         winTimeText.text = "Your time was:" + timer.GetTime().ToString("F2");
+        soundController.PLayWinSound();
 
         //set the velocirty of the rigid body to zero
         rb.velocity = Vector3.zero;
