@@ -65,14 +65,16 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (resetting)
+        if (gameController.controlType == ControlType.WorldTilt)
             return;
 
-        if (gameController.controlType == ControlType.WorldTilt)
+        if (resetting)
             return;
 
         if (gameOver == true)
             return;
+
+      
 
         if (grounded)
         {

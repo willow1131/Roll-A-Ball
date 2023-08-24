@@ -1744,7 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b62e2a764a58542bcc1af8aa6f1e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 20
   inGamePanel: {fileID: 1373556039}
   GameOverPanel: {fileID: 300616508}
   scoreText: {fileID: 320384877}
@@ -27421,6 +27421,65 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9113592133346757125, guid: 2eb6d537e6561d84494ddb26c9b32bdc, type: 3}
   m_PrefabInstance: {fileID: 456792771}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1200358283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200358285}
+  - component: {fileID: 1200358284}
+  - component: {fileID: 1200358286}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1200358284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200358283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fb311ba37d6c0498b0d3f17d4df3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlType: 0
+--- !u!4 &1200358285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200358283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 35
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1200358286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200358283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fb311ba37d6c0498b0d3f17d4df3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlType: 0
 --- !u!4 &1201631518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9113592133346757125, guid: 2eb6d537e6561d84494ddb26c9b32bdc, type: 3}
@@ -29693,10 +29752,6 @@ PrefabInstance:
     - target: {fileID: 7349465895069727664, guid: fa24263b9753f5c4eb1fb3b821b30023, type: 3}
       propertyPath: m_Name
       value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 7349465895069727664, guid: fa24263b9753f5c4eb1fb3b821b30023, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa24263b9753f5c4eb1fb3b821b30023, type: 3}
