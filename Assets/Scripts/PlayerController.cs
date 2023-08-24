@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Timer timer;
     private bool gameOver;
     private bool grounded = true; 
+    
 
     //Controllers
     GameController gameController;
@@ -77,8 +78,8 @@ public class PlayerController : MonoBehaviour
         {
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
-
-            Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+            rb.AddForce(movement * speed);
 
 
             if (cameraController.cameraStyle == CameraController.CameraStyle.Free)
@@ -114,6 +115,18 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(ResetPlayer());
         }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+            grounded = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+            grounded = false;
     }
 
     private void onCollisionEnter(Collision collision)
